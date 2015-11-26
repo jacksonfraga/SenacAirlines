@@ -40,6 +40,7 @@ public class SenacAirlines {
         for (int i = 0; i < avioes.size(); i++) {
             System.err.println(String.format("%s - %s", avioes.get(i).getCodigo(), avioes.get(i).getNome()));
         }
+        
     }
     
 }
