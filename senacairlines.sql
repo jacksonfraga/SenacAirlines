@@ -31,7 +31,7 @@ USE `senacairlines`;
 CREATE TABLE IF NOT EXISTS `aviao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(20) NOT NULL,
-  `nome` int(100) NOT NULL,
+  `nome` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
