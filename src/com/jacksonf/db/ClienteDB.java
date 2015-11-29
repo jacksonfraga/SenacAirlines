@@ -145,7 +145,7 @@ public class ClienteDB extends CrudDB<Cliente>{
             if (rs.next()) {
                 logger.debug("Registro encontrado");
                 Cliente cliente = new Cliente();
-                cliente.setId(rs.getInt("codigo"));
+                cliente.setId(rs.getInt("id"));
                 cliente.setNome(rs.getString("nome"));
                 cliente.setRg(rs.getString("rg"));
                 cliente.setTelefone(rs.getString("telefone"));

@@ -5,12 +5,8 @@
  */
 package senacairlines;
 
-import com.jacksonf.dto.Aviao;
-import com.jacksonf.dto.Cliente;
-import com.jacksonf.rn.AviaoRN;
-import com.jacksonf.rn.ClienteRN;
-import com.sun.security.ntlm.Client;
-import java.util.List;
+import com.jacksonf.view.MainJFrame;
+
 
 /**
  *
@@ -23,47 +19,50 @@ public class SenacAirlines {
      */
     public static void main(String[] args) {
         
-        AviaoRN aviaoRN = new AviaoRN();
-        ClienteRN clienteRN = new ClienteRN();
-                
-//        Aviao aviaoA = new Aviao(0, "PT-111", "Aviao A");
-//        Aviao aviaoB = new Aviao(0, "PT-222", "Aviao A");
-//        Aviao aviaoC = new Aviao(0, "PT-333", "Aviao C");
-//        Aviao aviaoD = new Aviao(0, "PT-444", "Aviao D");
+        MainJFrame frame = new MainJFrame();
+        frame.setVisible(true); 
+        
+//        AviaoRN aviaoRN = new AviaoRN();
+//        ClienteRN clienteRN = new ClienteRN();
+//                
+////        Aviao aviaoA = new Aviao(0, "PT-111", "Aviao A");
+////        Aviao aviaoB = new Aviao(0, "PT-222", "Aviao A");
+////        Aviao aviaoC = new Aviao(0, "PT-333", "Aviao C");
+////        Aviao aviaoD = new Aviao(0, "PT-444", "Aviao D");
+////        
+//
+////        
+////        aviaoRN.salvar(aviaoA);
+////        aviaoRN.salvar(aviaoB);
+////        aviaoRN.salvar(aviaoC);
+////        aviaoRN.salvar(aviaoD);
 //        
-
+//        Aviao aviaoBanco = new Aviao();
+//        aviaoBanco.setId(1);
+//        aviaoBanco = aviaoRN.consultar(aviaoBanco);
+//        String nomeAviao1 = aviaoBanco.getNome();
 //        
-//        aviaoRN.salvar(aviaoA);
-//        aviaoRN.salvar(aviaoB);
-//        aviaoRN.salvar(aviaoC);
-//        aviaoRN.salvar(aviaoD);
-        
-        Aviao aviaoBanco = new Aviao();
-        aviaoBanco.setId(1);
-        aviaoBanco = aviaoRN.consultar(aviaoBanco);
-        String nomeAviao1 = aviaoBanco.getNome();
-        
-        aviaoBanco.setCodigo("ED-990");
-        aviaoRN.alterar(aviaoBanco);
-        
-        List<Aviao> avioes = aviaoRN.pesquisar(nomeAviao1);
-        
-        
-        for (int i = 0; i < avioes.size(); i++) {
-            System.err.println(String.format("%s - %s", avioes.get(i).getCodigo(), avioes.get(i).getNome()));
-        }
-        
-        Cliente cliente1 = new Cliente(0, "67567374", "Cliente A", "(51) 9999-9999");
-        Cliente cliente2 = new Cliente(0, "SP908978", "Cliente B", "(51) 9999-2222");
-        Cliente cliente3 = new Cliente(0, "65435242", "Cliente B", "(51) 9999-7777");
-        
-        clienteRN.salvar(cliente1);
-        clienteRN.salvar(cliente2);
-        clienteRN.salvar(cliente3);
-        
-        Cliente clienteBanco = clienteRN.consultar(new Cliente(1, "", "", ""));
-        clienteBanco.setNome("Jackson");
-        clienteRN.alterar(clienteBanco);
+//        aviaoBanco.setCodigo("ED-990");
+//        aviaoRN.alterar(aviaoBanco);
+//        
+//        List<Aviao> avioes = aviaoRN.pesquisar(nomeAviao1);
+//        
+//        
+//        avioes.stream().forEach((aviao) -> {
+//            System.err.println(String.format("%s - %s", aviao.getCodigo(), aviao.getNome()));
+//        });
+//        
+//        Cliente cliente1 = new Cliente(0, "67567374", "Cliente A", "(51) 9999-9999");
+//        Cliente cliente2 = new Cliente(0, "SP908978", "Cliente B", "(51) 9999-2222");
+//        Cliente cliente3 = new Cliente(0, "65435242", "Cliente B", "(51) 9999-7777");
+//        
+//        clienteRN.salvar(cliente1);
+//        clienteRN.salvar(cliente2);
+//        clienteRN.salvar(cliente3);
+//        
+//        Cliente clienteBanco = clienteRN.consultar(new Cliente(1, "", "", ""));
+//        clienteBanco.setNome("Jackson");
+//        clienteRN.alterar(clienteBanco);
         
         
         

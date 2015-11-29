@@ -160,7 +160,7 @@ public class VooDB extends CrudDB<Voo>{
 
             logger.debug("Consultando: " + pesquisa);
             ResultSet rs = pstm.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 logger.debug("Registro encontrado");
                 Voo voo = new Voo();
                 voo.setId(rs.getInt("id"));
