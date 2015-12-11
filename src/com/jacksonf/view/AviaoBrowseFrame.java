@@ -9,6 +9,9 @@ import com.jacksonf.adapter.AviaoDataTable;
 import com.jacksonf.dto.Aviao;
 import com.jacksonf.rn.AviaoRN;
 import java.util.List;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import javax.swing.table.TableModel;
 
 /**
@@ -18,12 +21,14 @@ import javax.swing.table.TableModel;
 public class AviaoBrowseFrame extends javax.swing.JFrame {
 
     private List<Aviao> listagem;
+    private final AviaoRN aviaoRN = new AviaoRN();
 
     /**
      * Creates new form AviaoBrowseFrame
      */
     public AviaoBrowseFrame() {
         initComponents();
+        
     }
 
     /**
@@ -38,6 +43,8 @@ public class AviaoBrowseFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -60,6 +67,20 @@ public class AviaoBrowseFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Excluir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Editar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,7 +88,12 @@ public class AviaoBrowseFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -77,7 +103,10 @@ public class AviaoBrowseFrame extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(21, 21, 21))
         );
 
@@ -86,12 +115,15 @@ public class AviaoBrowseFrame extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        AviaoRN aviaoRN = new AviaoRN();
+        CarregarRegistros();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void CarregarRegistros() {
         listagem = aviaoRN.pesquisar("");
         TableModel tableModel = new AviaoDataTable(listagem);
         jTable1.setModel(tableModel);
-    }//GEN-LAST:event_formWindowOpened
-
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         AviaoEditFrame frame = new AviaoEditFrame();
@@ -103,13 +135,53 @@ public class AviaoBrowseFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
 
-            Aviao aviaoSelec = listagem.get(jTable1.getSelectedRow());
-
-            AviaoEditFrame frame = new AviaoEditFrame(aviaoSelec);
-            frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-            frame.setVisible(true);
+            EditarRegistro();
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        ExcluirRegistro();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        EditarRegistro();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void EditarRegistro() {
+        Aviao aviaoSelec = listagem.get(jTable1.getSelectedRow());
+
+        AviaoEditFrame frame = new AviaoEditFrame(aviaoSelec);
+        frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setVisible(true);
+    }
+    
+    private void ExcluirRegistro(){
+        
+        //default icon, custom title
+        int n = JOptionPane.showConfirmDialog(
+            this,
+            "Deseja excluir o registro?",
+            "Confirmar",
+            JOptionPane.YES_NO_OPTION);
+    
+        if (n == JOptionPane.YES_OPTION) {
+            
+            try {
+                Aviao aviaoSelec = listagem.get(jTable1.getSelectedRow());
+                aviaoRN.excluir(aviaoSelec);
+                
+                CarregarRegistros();
+                JOptionPane.showMessageDialog(this, "Registro excluído com sucesso!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }            
+            
+        }        
+            
+        
+    }
 
     /**
      * @param args the command line arguments
@@ -148,6 +220,8 @@ public class AviaoBrowseFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

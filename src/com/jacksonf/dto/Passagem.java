@@ -5,7 +5,6 @@
  */
 package com.jacksonf.dto;
 
-import java.security.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 

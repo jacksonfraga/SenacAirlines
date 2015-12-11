@@ -25,8 +25,7 @@ public class AviaoEditFrame extends javax.swing.JFrame {
      */
     public AviaoEditFrame() {
         initComponents();
-        aviaoRN = new AviaoRN();
-        
+        aviaoRN = new AviaoRN();        
         aviao = new Aviao();
         
         txtId.setText(StringUtils.EMPTY);
@@ -78,6 +77,7 @@ public class AviaoEditFrame extends javax.swing.JFrame {
             }
         });
 
+        txtId.setEditable(false);
         txtId.setText("jTextField1");
 
         txtCodigo.setText("jTextField2");
@@ -102,12 +102,12 @@ public class AviaoEditFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton1))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
                         .addComponent(jLabel2)
                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

@@ -142,7 +142,7 @@ public class ClienteDB extends CrudDB<Cliente>{
 
             logger.debug("Consultando: " + pesquisa);
             ResultSet rs = pstm.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 logger.debug("Registro encontrado");
                 Cliente cliente = new Cliente();
                 cliente.setId(rs.getInt("id"));
